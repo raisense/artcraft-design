@@ -28,6 +28,7 @@ export default {
       src: "~/plugins/scroll-lock.js",
       mode: "client"
     },
+    "~/plugins/vue-slick-carousel.js",
     "~/plugins/vue-stripe-menu.js"
   ],
 
@@ -45,7 +46,8 @@ export default {
     "@nuxtjs/tailwindcss",
     "@nuxtjs/prismic",
     "@nuxtjs/composition-api/module",
-    "@nuxt/image"
+    "@nuxt/image",
+    "@nuxtjs/device"
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules

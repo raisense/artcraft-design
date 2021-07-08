@@ -21,14 +21,17 @@
     "v-body-scroll-lock": "^1.1.3",
     "vue-feather": "^1.1.1",
     "vue-feather-icons": "^5.1.0",
+    "vue-slick-carousel": "^1.0.6",
     "vue-stripe-menu": "1.5.0"
   },
   "devDependencies": {
     "@nuxt/image": "^0.4.14",
     "@nuxtjs/composition-api": "^0.24.4",
+    "@nuxtjs/device": "^2.1.0",
     "@nuxtjs/prismic": "^1.3.1",
     "@nuxtjs/tailwindcss": "^4.0.1",
     "postcss": "^8.2.8",
-    "svg-inline-loader": "^0.8.2"
+    "svg-inline-loader": "^0.8.2",
+    "tailwindcss-multi-column": "^1.0.2"
   }
 }

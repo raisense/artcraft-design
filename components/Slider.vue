@@ -1,19 +1,20 @@
 <template>
-  <div
-    class="slider h-full grid grid-rows-4 lg:grid-rows-1 md:grid-rows-2 md:grid-cols-2 lg:grid-cols-4 "
-  >
+  <VueSlickCarousel class="full-screen-carousel" v-bind="slickOptions">
     <div class="slider-item" v-for="project in projects" :key="project.id">
       <nuxt-img
+        v-if="project.featured_project.data.featured_image"
         class="h-full w-full object-cover"
-        :src="project.data.featured_image.url"
-        sizes="md:360px lg:580px xl:50vw"
+        :src="project.featured_project.data.featured_image.url"
+        sizes="md:640px xl:70vw"
       />
       <div class="slider-overlay absolute bottom-0 left-0">
         <prismic-rich-text
           class="text-3xl md:text-5xl lg:text-5xl xl:text-6xl mb-6 lg:mb-8 lg:mb-12 text-white font-bold"
-          :field="project.data.title"
+          :field="project.featured_project.data.title"
         />
-        <nuxt-link :to="localePath(`/projects/${project.uid}`)">
+        <nuxt-link
+          :to="localePath(`/projects/${project.featured_project.uid}`)"
+        >
           <button class="block btn-outlined">
             {{ $t("Read more") }}
             <svg-icon class="inline-block" icon="chevron-right" />
@@ -21,16 +22,50 @@
         </nuxt-link>
       </div>
     </div>
-  </div>
+  </VueSlickCarousel>
 </template>
 
 <script>
+import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
+import "vue-slick-carousel/dist/vue-slick-carousel.css";
+
 export default {
   props: {
     projects: {
       type: Array,
       default: () => []
     }
+  },
+  data() {
+    return {
+      slickOptions: {
+        slidesToShow: this.$device.isMobile ? 1 : 4,
+        arrows: true,
+        autoplay: true,
+        pauseOnHover: false,
+        responsive: [
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 3,
+              autoplay: true
+            }
+          },
+          {
+            breakpoint: 768,
+            settings: {
+              slidesToShow: 2
+            }
+          },
+          {
+            breakpoint: 564,
+            settings: {
+              slidesToShow: 1
+            }
+          }
+        ]
+      }
+    };
   }
 };
 </script>
@@ -41,7 +76,8 @@ export default {
 }
 
 .slider-item {
-  @apply overflow-hidden relative;
+  /* overflow-hidden */
+  @apply relative overflow-hidden h-full;
 }
 
 .slider-overlay {
@@ -68,16 +104,37 @@ button:hover .icon {
 }
 
 .btn-outlined {
-  @apply border border-2 bg-transparent text-white font-bold focus:text-black hover:text-black transition-all hover:bg-white focus:bg-white focus:text-black py-4 py-2 px-6 md:py-6 md:px-8 xl:px-12;
+  @apply border border-2 bg-transparent text-white font-bold focus:text-black hover:text-black transition-all hover:bg-white focus:bg-white focus:text-black py-4 py-2 px-6 w-full md:w-auto md:py-6 md:px-8 xl:px-12;
+}
+
+.slick-arrow {
+  z-index: 10;
+}
+
+.slick-arrow:before {
+  font-size: 32px;
+}
+
+.slick-prev {
+  left: 20px;
+}
+.slick-next {
+  right: 30px;
 }
 
 @media (max-width: 768px) {
   .slider {
     height: auto;
   }
+}
+.full-screen-carousel {
+  width: 100%;
+  height: calc(100vh - 64px);
+}
 
-  .slider-item {
-    height: calc(50vh - 32px);
-  }
+.full-screen-carousel .slick-list,
+.full-screen-carousel .slick-track,
+.full-screen-carousel .slick-slide > div {
+  height: 100%;
 }
 </style>
