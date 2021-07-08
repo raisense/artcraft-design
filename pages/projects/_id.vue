@@ -28,15 +28,21 @@
           {{ $prismic.asText(document.data.title) }}
         </h2>
         <prismic-rich-text
-          class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5"
+          class="column-count-3"
           :field="document.data.description"
         />
         <div class="mt-5 flex flex-col items-end">
           <div class="text-semibold">
-            <div>{{ $t("Year") }}: {{ document.data.year }}</div>
-            <div>
+            <div class="text-semibold">
+              {{ $t("Year") }}: {{ document.data.year }}
+            </div>
+            <div class="text-semibold">
               {{ $t("Website") }}:
-              <a target="_blank" :href="document.data.website.url">
+              <a
+                target="_blank"
+                class="underline"
+                :href="document.data.website.url"
+              >
                 {{ document.data.website.url.split("://")[1] }}
               </a>
             </div>
@@ -149,5 +155,28 @@ export default defineComponent({
 }
 .more-btn:hover .icon {
   transform: translateX(15px);
+}
+
+.column-count-3 {
+  -webkit-column-count: 3; /* Chrome, Safari, Opera */
+  -moz-column-count: 3; /* Firefox */
+  column-count: 3;
+  /* column-fill: auto; */
+}
+
+@media (max-width: 768px) {
+  .column-count-3 {
+    -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+  }
+}
+
+@media (max-width: 480px) {
+  .column-count-3 {
+    -webkit-column-count: 1; /* Chrome, Safari, Opera */
+    -moz-column-count: 1; /* Firefox */
+    column-count: 1;
+  }
 }
 </style>

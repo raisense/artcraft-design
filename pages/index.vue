@@ -2,7 +2,7 @@
   <div>
     <!-- <div class="home-screen w-screen h-screen bg-no-repeat bg-cover"> -->
     <Navbar />
-    <Slider class="w-screen h-screen" :projects="projects" />
+    <Slider :projects="projects" />
     <!-- <div class="hero-wrapper container h-full mx-auto">
       <div class="flex justify-between items-center h-full">
         <div class="mb-16 xs:mb-0 text-center mx-auto">
@@ -40,41 +40,19 @@ export default {
 
     const document = await $prismic.api.query(
       $prismic.predicates.at("document.type", "homepage"),
-      { fetchLinks: "projects.title,projects.featured_image", lang }
+      {
+        fetchLinks: "projects.title,projects.featured_image",
+        lang
+      }
     );
 
-    const {
-      first_project,
-      second_project,
-      third_project,
-      fourth_project
-    } = document.results[0].data;
-
-    const projects = [
-      first_project,
-      second_project,
-      third_project,
-      fourth_project
-    ];
+    const projects = document.results[0].data.featured_projects;
 
     if (document) {
       return { document, projects };
     } else {
       error({ statusCode: 404, message: "Page not found" });
     }
-  },
-  methods: {
-    async fetchProject(project) {
-      const data = await this.$prismic.api.getByUID("projects", project.uid);
-
-      this.projectsList.push(data);
-    }
-  },
-
-  mounted() {
-    // this.projects.forEach(project => {
-    //   this.fetchProject(project);
-    // });
   }
 };
 </script>
