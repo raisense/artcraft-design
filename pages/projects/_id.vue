@@ -57,6 +57,12 @@
         :src="slice.primary.image.url"
         :key="`slice-${i}`"
       />
+      <prismic-embed
+        class="w-full aspect-w-3 aspect-h-4 lg:aspect-w-16 lg:aspect-h-9"
+        v-if="slice.slice_type === 'embed'"
+        :key="`slice-${i}`"
+        :field="slice.primary.embed"
+      />
       <Container v-else :key="`slice-${i}`" class="my-12">
         <prismic-rich-text
           class="text-xl mx-auto md:w-1/2"
