@@ -13,9 +13,10 @@
           :field="project.featured_project.data.title"
         />
         <nuxt-link
+          class="block md:inline-block  mb-12 md:mb-0"
           :to="localePath(`/projects/${project.featured_project.uid}`)"
         >
-          <button class="mb-12 md:mb-0 block btn-outlined">
+          <button class="block btn-outlined">
             {{ $t("Read more") }}
             <svg-icon class="inline-block" icon="chevron-right" />
           </button>
