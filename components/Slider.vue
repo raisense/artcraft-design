@@ -15,7 +15,7 @@
         <nuxt-link
           :to="localePath(`/projects/${project.featured_project.uid}`)"
         >
-          <button class="block btn-outlined">
+          <button class="mb-12 md:mb-0 block btn-outlined">
             {{ $t("Read more") }}
             <svg-icon class="inline-block" icon="chevron-right" />
           </button>
