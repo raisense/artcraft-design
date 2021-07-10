@@ -20,7 +20,11 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ["~/assets/styles/global.css"],
+  css: [
+    "~/assets/styles/global.css",
+    "vue-slick-carousel/dist/vue-slick-carousel.css",
+    "vue-slick-carousel/dist/vue-slick-carousel-theme.css"
+  ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [

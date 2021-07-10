@@ -8,17 +8,18 @@
         <vsm-menu
           class="font-medium hidden lg:inline-block"
           :menu="links"
-          :base-width="300"
+          :base-width="400"
           :base-height="400"
           :screen-offset="20"
           element="header"
           handler="hover"
         >
           <template #default="{ item }">
-            <div class="wrap-content">
+            <div class="wrap-content" v-if="item.children.length > 0">
               <nuxt-link
+                prefetch
                 :to="child.attributes.to"
-                class="block transition-transform duration-250 transform hover:translate-x-2 text-lg mb-3 font-medium"
+                class="block whitespace-nowrap transition-transform duration-250 transform hover:translate-x-2 text-lg mb-3 last:mb-0 font-medium"
                 v-for="(child, idx) in item.children"
                 :key="`child-${idx}`"
               >
@@ -98,7 +99,7 @@ export default {
 }
 
 .vsm-dropdown {
-  top: 40px !important;
+  top: 37px !important;
 }
 
 .vsm-link {

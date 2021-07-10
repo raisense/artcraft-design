@@ -2,9 +2,9 @@
   <VueSlickCarousel class="full-screen-carousel" v-bind="slickOptions">
     <div class="slider-item" v-for="project in projects" :key="project.id">
       <nuxt-img
-        v-if="project.featured_project.data.featured_image"
+        v-if="project.featured_project.data.cover_image"
         class="h-full w-full object-cover"
-        :src="project.featured_project.data.featured_image.url"
+        :src="project.featured_project.data.cover_image.url"
         sizes="md:640px xl:70vw"
       />
       <div class="slider-overlay absolute bottom-0 left-0">
@@ -27,9 +27,6 @@
 </template>
 
 <script>
-import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
-import "vue-slick-carousel/dist/vue-slick-carousel.css";
-
 export default {
   props: {
     projects: {

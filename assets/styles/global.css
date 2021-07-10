@@ -42,9 +42,9 @@ body {
 .section-title h2:before,
 .section-title h2:after {
   content: "";
-  height: 2px;
+  height: 1px;
   width: 150px;
-  @apply hidden md:block absolute top-4 sm:top-5 bg-black;
+  @apply hidden md:block absolute top-4 sm:top-section-title bg-black;
 }
 
 .section-title h2:before {
@@ -56,5 +56,5 @@ body {
 
 .section-title h2 {
   width: fit-content;
-  @apply relative mx-auto;
+  @apply relative mx-auto leading-more-relaxed;
 }

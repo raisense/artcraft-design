@@ -1,7 +1,7 @@
 <template>
   <article class="py-10 lg:py-14">
     <prismic-rich-text
-      class="container mx-auto px-8 lg:px-0 text-2xl sm:text-4xl font-bold mb-10"
+      class="container mx-auto px-8 lg:px-0 text-2xl sm:text-3xl font-bold mb-10"
       :field="document.data.page_title"
     />
     <template v-for="(slice, index) in document.data.body">

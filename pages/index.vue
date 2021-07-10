@@ -41,7 +41,7 @@ export default {
     const document = await $prismic.api.query(
       $prismic.predicates.at("document.type", "homepage"),
       {
-        fetchLinks: "projects.title,projects.featured_image",
+        fetchLinks: "projects.title,projects.cover_image",
         lang
       }
     );
