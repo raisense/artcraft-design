@@ -53,6 +53,9 @@ export default {
       }));
       this.$store.commit("UPDATE_MENU_LINKS", { categories });
     }
+  },
+  created() {
+    this.$store.dispatch("getSocialLinks");
   }
 };
 </script>

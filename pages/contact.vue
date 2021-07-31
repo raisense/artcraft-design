@@ -26,11 +26,11 @@
       </h2>
       <div class="grid grid-cols-2">
         <a
-          v-for="(social, i) in fields.social_links"
-          :key="`social-${i}`"
-          :href="social.social_link.url"
+          v-for="social in socialLinks"
+          :key="`social-${social.id}`"
+          :href="social.data.link_address.url"
         >
-          {{ social.social_name[0].text }}
+          {{ $prismic.asText(social.data.title) }}
         </a>
       </div>
     </div>
@@ -74,12 +74,18 @@
 <script>
 import { defineComponent, useMeta } from "@nuxtjs/composition-api";
 import { resolveLang } from "~/utils/lang";
+import { mapState } from "vuex";
 
 export default defineComponent({
   head() {
     return {
       title: this.$t("navbar.contact")
     };
+  },
+  computed: {
+    ...mapState({
+      socialLinks: state => state.socialLinks
+    })
   },
   setup() {
     const generateMapLink = ({ longitude, latitude }) =>

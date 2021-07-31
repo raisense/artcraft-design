@@ -5,23 +5,13 @@
         {{ $t("Copyright") }} {{ year }} | ArtCraft Design
       </div>
       <div class="social-links">
-        <a href="#">
-          <svg-icon icon="telegram" />
-        </a>
-        <a href="#">
-          <svg-icon icon="messenger" />
-        </a>
-        <a href="#">
-          <svg-icon icon="youtube" />
-        </a>
-        <a href="#">
-          <svg-icon icon="twitter" />
-        </a>
-        <a href="#">
-          <svg-icon icon="dribble" />
-        </a>
-        <a href="#">
-          <svg-icon icon="insta" />
+        <a
+          v-for="item in socialLinks"
+          :href="item.data.link_address.url"
+          :key="item.id"
+          :title="$prismic.asText(item.data.title)"
+        >
+          <svg-icon :icon="getSiteName(item.data.link_address.url)" />
         </a>
       </div>
     </footer>
@@ -29,10 +19,26 @@
 </template>
 
 <script>
+import psl from "psl";
+import { mapState } from "vuex";
+
 export default {
   computed: {
+    ...mapState({
+      socialLinks: state => state.socialLinks
+    }),
     year() {
       return new Date().getFullYear();
+    }
+  },
+  methods: {
+    getSiteName(link) {
+      if (!link) {
+        return "#";
+      }
+
+      const parsed = psl.parse(link.replace(/(^\w+:|^)\/\//, ""));
+      return parsed.sld;
     }
   }
 };
