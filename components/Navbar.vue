@@ -18,7 +18,7 @@
             <div class="wrap-content" v-if="item.children.length > 0">
               <nuxt-link
                 prefetch
-                :to="child.attributes.to"
+                :to="localePath(child.attributes.to)"
                 class="block whitespace-nowrap transition-transform duration-250 transform hover:translate-x-2 text-lg mb-3 last:mb-0 font-medium"
                 v-for="(child, idx) in item.children"
                 :key="`child-${idx}`"
@@ -43,7 +43,13 @@
 export default {
   computed: {
     links() {
-      return this.$store.state.links;
+      return this.$store.state.links.map(link => ({
+        ...link,
+        attributes: {
+          ...link.attributes,
+          to: this.localePath(link.attributes.to)
+        }
+      }));
     }
   }
 };
