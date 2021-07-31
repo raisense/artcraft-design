@@ -1,27 +1,7 @@
 <template>
   <div>
-    <!-- <div class="home-screen w-screen h-screen bg-no-repeat bg-cover"> -->
     <Navbar />
     <Slider :projects="projects" />
-    <!-- <div class="hero-wrapper container h-full mx-auto">
-      <div class="flex justify-between items-center h-full">
-        <div class="mb-16 xs:mb-0 text-center mx-auto">
-          <prismic-rich-text
-            class="block px-5 md:px-0 text-4xl md:text-6xl mb-5 sm:mb-10 font-bold"
-            :field="document.results[0].data.headline"
-          />
-
-          <nuxt-link :to="localePath('/projects')" class="">
-            <button
-              class="border border-2 bg-transparent text-white font-bold focus:text-black hover:text-black transition-all hover:bg-white focus:bg-white focus:text-black py-4 xs:py-6 px-16"
-            >
-              {{ $t("navbar.projects") }}
-            </button>
-          </nuxt-link>
-        </div>
-      </div>
-    </div> -->
-    <!-- </div> -->
   </div>
 </template>
 
@@ -41,12 +21,15 @@ export default {
     const document = await $prismic.api.query(
       $prismic.predicates.at("document.type", "homepage"),
       {
-        fetchLinks: "projects.title,projects.cover_image",
+        fetchLinks: "projects.title,projects.cover_image,projects.order",
         lang
       }
     );
 
-    const projects = document.results[0].data.featured_projects;
+    const byOrder = (a, b) =>
+      a.featured_project.data.order - b.featured_project.data.order;
+
+    const projects = document.results[0].data.featured_projects.sort(byOrder);
 
     if (document) {
       return { document, projects };

@@ -17,7 +17,7 @@
       <div class="grid gird-cols-1 md:grid-cols-2 gap-16">
         <nuxt-link
           class="project-card"
-          v-for="project in category.data.category_projects"
+          v-for="project in sortByOrder(category.data.category_projects)"
           :key="project.category_project.id"
           :to="localePath(`/projects/${project.category_project.uid}`)"
         >
@@ -54,7 +54,14 @@ export default {
       title: this.$t("navbar.projects")
     };
   },
-  methods: { slugify },
+  methods: {
+    slugify,
+    sortByOrder(list) {
+      return [...list].sort(
+        (a, b) => a.category_project.data.order - b.category_project.data.order
+      );
+    }
+  },
   mounted() {
     if (this.$route.hash)
       document.querySelector(this.$route.hash).scrollIntoView();
@@ -67,8 +74,10 @@ export default {
     const document = await $prismic.api.query(
       $prismic.predicates.at("document.type", "categories"),
       {
-        fetchLinks: "projects.title,projects.excerpt,projects.secondary_cover",
-        lang: lang
+        fetchLinks:
+          "projects.title,projects.excerpt,projects.secondary_cover,projects.order",
+        lang: lang,
+        orderings: "[document.first_publication_date]"
       }
     );
 
