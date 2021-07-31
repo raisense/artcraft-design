@@ -38,7 +38,7 @@
       <h2 class="text-3xl mb-8 font-semibold">
         {{ $t("Contact us") }}
       </h2>
-      <form netlify name="contact-us">
+      <form netlify method="POST" name="contact-us">
         <input
           class="form-field w-full"
           name="first_name"
