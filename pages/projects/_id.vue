@@ -17,11 +17,11 @@
     </div>
 
     <Container class="grid grid-cols-1 md:grid-cols-12 lg:py-14 py-10">
-      <div class="col-span-4 mb-10">
+      <div class="col-span-4 mb-10" v-if="!!document.data.scope_of_work.length">
         <h2 class="mb-8 text-2xl md:text-3xl font-semibold">
           Scope of work
         </h2>
-        <prismic-rich-text class="" :field="document.data.scope_of_work" />
+        <prismic-rich-text :field="document.data.scope_of_work" />
       </div>
       <div class="col-span-8">
         <h2 class="mb-8 text-2xl md:text-3xl font-semibold">
@@ -60,10 +60,10 @@
       <prismic-embed
         class="w-full aspect-w-3 aspect-h-4 lg:aspect-w-16 lg:aspect-h-9"
         v-if="slice.slice_type === 'embed'"
-        :key="`slice-${i}`"
+        :key="`embed-${i}`"
         :field="slice.primary.embed"
       />
-      <Container v-else :key="`slice-${i}`" class="my-12">
+      <Container v-else :key="`rich-text-${i}`" class="my-12">
         <prismic-rich-text
           class="text-xl mx-auto md:w-1/2"
           :field="slice.primary.text"
