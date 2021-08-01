@@ -98,7 +98,7 @@ button:hover .icon {
   @apply transition-transform duration-500 ease-in-out;
 }
 .slider-item:hover img {
-  @apply transform scale-125;
+  @apply transform md:scale-125;
 }
 
 .btn-outlined {
