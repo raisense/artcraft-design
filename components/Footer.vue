@@ -2,7 +2,7 @@
   <Container class="py-8">
     <footer class="flex flex-col md:flex-row md:items-center justify-between">
       <div class="mb-4 xs:mb-0">
-        {{ $t("Copyright") }} {{ year }} | ArtCraft Design
+        {{ $t("Copyright") }} {{ year }} | Voxe Media Group
       </div>
       <div class="social-links">
         <a
