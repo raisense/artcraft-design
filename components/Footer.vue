@@ -1,5 +1,5 @@
 <template>
-  <Container class="py-8">
+  <Container id="footer" class="py-8">
     <footer class="flex flex-col md:flex-row md:items-center justify-between">
       <div class="mb-4 xs:mb-0">
         {{ $t("Copyright") }} {{ year }} | Voxe Media Group

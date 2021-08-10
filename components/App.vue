@@ -1,5 +1,10 @@
 <template>
-  <div>
+  <div
+    ref="main"
+    :class="{
+      'full-screen': isAppSmallThanWindow
+    }"
+  >
     <SvgSprite />
     <slot />
     <MenuList />
@@ -11,7 +16,21 @@ import { resolveLang } from "~/utils/lang";
 import { slugify } from "~/utils/slug";
 
 export default {
+  data() {
+    return {
+      isAppSmallThanWindow: false
+    };
+  },
+  methods: {
+    checkAppHeight() {
+      this.isAppSmallThanWindow =
+        this.$refs.main.clientHeight < window.innerHeight;
+    }
+  },
   async mounted() {
+    this.checkAppHeight();
+    window.addEventListener("resize", this.checkAppHeight);
+
     const lang = resolveLang(this.$i18n.locale);
 
     const servicesDoc = await this.$prismic.api.query(
@@ -56,8 +75,21 @@ export default {
   },
   created() {
     this.$store.dispatch("getSocialLinks");
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.checkAppHeight);
   }
 };
 </script>
 
-<style></style>
+<style>
+.full-screen {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.full-screen #footer-wrapper {
+  margin-top: auto !important;
+}
+</style>
