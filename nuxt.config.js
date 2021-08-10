@@ -66,6 +66,7 @@ export default {
   i18n: {
     locales: ["en", "ru", "uz"],
     defaultLocale: "ru",
+    detectBrowserLanguage: false,
     vueI18n: {
       fallbackLocale: "uz",
       messages: {
